@@ -72,7 +72,7 @@ The project implements a comprehensive testing strategy across all layers:
 ## Screen Shots
 ### Phone
 ## Posts Listing
-<img src="https://github.com/Suparna-here/ThePostsApp/blob/master/ScreenShots/Phone/PostsListing.png" width="40%" />
+<img src="https://github.com/Suparna-here/ThePostsApp/tree/main/ScreenShots/Phone/PostsListing.png" width="40%" />
 
 ## Post In Detail
-<img src="https://github.com/Suparna-here/ThePostsApp/blob/master/ScreenShots/Phone/PostInDetail.png" width="40%" />
+<img src="https://github.com/Suparna-here/ThePostsApp/tree/main/ScreenShots/Phone/PostInDetail.png" width="40%" />
