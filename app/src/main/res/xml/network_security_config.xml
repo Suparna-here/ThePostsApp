@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- By default, reject all cleartext (HTTP) traffic app-wide -->
+    <base-config cleartextTrafficPermitted="false" />
+
+    <!-- Specifically configure our API domain -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">jsonplaceholder.typicode.com</domain>
+
+        <!-- Trust only system-provided Certificate Authorities -->
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
