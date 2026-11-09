@@ -30,33 +30,30 @@ class PostRepositoryImplTest {
     }
 
     @Test
-    fun `getPosts returns Success when APIService succeeds`() {
+    fun `getPostById returns Success when APIService succeeds`() {
         runTest(testDispatcher) {
             // Arrange
-            val expectedDtos = listOf(
-                PostDto(id = 1, userId = 1, title = "Test", body = "Body")
-            )
-            coEvery { apiService.getPosts() } returns expectedDtos
+            val expectedDto = PostDto(id = 1, userId = 1, title = "Test", body = "Body")
+            coEvery { apiService.getPostById(1) } returns expectedDto
 
             // Act
-            val result = repository.getPosts()
+            val result = repository.getPostById(1)
 
             // Assert
             assertTrue(result.isSuccess)
-            val posts = result.getOrNull()
-            assertEquals(1, posts?.size)
-            assertEquals("Test", posts?.first()?.title)
+            val post = result.getOrNull()
+            assertEquals("Test", post?.title)
         }
     }
 
     @Test
-    fun `getPosts returns NetworkError when APIService throws IOException`() {
+    fun `getPostById returns NetworkError when APIService throws IOException`() {
         runTest(testDispatcher) {
             // Arrange
-            coEvery { apiService.getPosts() } throws IOException("No connection")
+            coEvery { apiService.getPostById(1) } throws IOException("No connection")
 
             // Act
-            val result = repository.getPosts()
+            val result = repository.getPostById(1)
 
             // Assert
             assertTrue(result.isFailure)
@@ -66,14 +63,14 @@ class PostRepositoryImplTest {
     }
 
     @Test
-    fun `getPosts returns Unauthorized when APIService throws 401 HttpException`() {
+    fun `getPostById returns Unauthorized when APIService throws 401 HttpException`() {
         runTest(testDispatcher) {
             // Arrange
-            val response = Response.error<List<PostDto>>(401, "".toResponseBody())
-            coEvery { apiService.getPosts() } throws HttpException(response)
+            val response = Response.error<PostDto>(401, "".toResponseBody())
+            coEvery { apiService.getPostById(1) } throws HttpException(response)
 
             // Act
-            val result = repository.getPosts()
+            val result = repository.getPostById(1)
 
             // Assert
             assertTrue(result.isFailure)
@@ -83,14 +80,14 @@ class PostRepositoryImplTest {
     }
 
     @Test
-    fun `getPosts returns ServerError when APIService throws 500 HttpException`() {
+    fun `getPostById returns ServerError when APIService throws 500 HttpException`() {
         runTest(testDispatcher) {
             // Arrange
-            val response = Response.error<List<PostDto>>(500, "".toResponseBody())
-            coEvery { apiService.getPosts() } throws HttpException(response)
+            val response = Response.error<PostDto>(500, "".toResponseBody())
+            coEvery { apiService.getPostById(1) } throws HttpException(response)
 
             // Act
-            val result = repository.getPosts()
+            val result = repository.getPostById(1)
 
             // Assert
             assertTrue(result.isFailure)
